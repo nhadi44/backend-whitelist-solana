@@ -5,13 +5,22 @@ const { exit } = require("process");
 const cors = require("cors");
 require("dotenv").config();
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 app.use(exp.json());
 const corsOptions = {
   origin: "*",
   credentials: true,
   optionSuccessStatus: 200,
 };
-app.use(cors(corsOptions));
+app.use(cors());
 
 let csvToJson = require("convert-csv-to-json");
 
@@ -89,5 +98,5 @@ app.put("/whitelisted/update/:address/:secret", (req, res) => {
   });
   res.send(result);
 });
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`listening on port ${port}`));
