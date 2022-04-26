@@ -11,7 +11,7 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 };
-app.use(cors());
+app.use(cors(corsOptions));
 
 let csvToJson = require("convert-csv-to-json");
 
